@@ -1,0 +1,22 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Tareas</title>
+</head>
+<body>
+    <h1>Lista de Tareas</h1>
+    
+    <form action="/add" method="post">
+        <input type="text" name="description" placeholder="Nueva tarea" required>
+        <button type="submit">Agregar</button>
+    </form>
+
+    <h2>Tareas:</h2>
+    <ul>
+        {% for task in tasks %}
+            <li>{{ task[1] }} {% if task[2] %}(Completada){% endif %}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
