@@ -1,0 +1,29 @@
+services:
+  flask-app:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: "flask-to-do"
+    ports:
+      - "5000:5000"
+    depends_on:
+      - postgresql
+    environment:
+      - DATABASE_HOST=postgresql  # Nombre del servicio como host
+      - DATABASE_USER=admin
+      - DATABASE_PASSWORD=password
+      - DATABASE_NAME=to_do_db
+  postgresql:
+    image: postgres:latest
+    container_name: db
+    ports:
+      - "5432:5432"
+    volumes:
+      - dbvol:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=to_do_db
+
+volumes:
+  dbvol: 
